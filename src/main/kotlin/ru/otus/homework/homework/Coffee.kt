@@ -20,32 +20,25 @@ class SimpleCoffee : Coffee {
     override fun description() = "Простой кофе"
 }
 
-class MilkDecorator(private val coffee: Coffee) : Coffee by coffee {
-    override fun cost(): Int {
-        return coffee.cost() + 50
-    }
+abstract class Decorator(private val coffee: Coffee): Coffee {
+    abstract val extCost: Int
+    abstract val extDescription: String
 
-    override fun description(): String {
-        return coffee.description() + ", молоко"
-    }
+    override fun cost() = coffee.cost() + extCost
+    override fun description() = coffee.description() + ", " + extDescription
 }
 
-class SugarDecorator(private val coffee: Coffee) : Coffee by coffee {
-    override fun cost(): Int {
-        return coffee.cost() + 20
-    }
-
-    override fun description(): String {
-        return coffee.description() + ", сахар"
-    }
+class MilkDecorator(coffee: Coffee) : Decorator(coffee) {
+    override val extCost: Int = 50
+    override val extDescription: String = "молоко"
 }
 
-class VanillaDecorator(private val coffee: Coffee) : Coffee by coffee {
-    override fun cost(): Int {
-        return coffee.cost() + 70
-    }
+class SugarDecorator(coffee: Coffee) : Decorator(coffee) {
+    override val extCost: Int = 20
+    override val extDescription: String = "сахар"
+}
 
-    override fun description(): String {
-        return coffee.description() + ", ваниль"
-    }
+class VanillaDecorator(coffee: Coffee) : Decorator(coffee) {
+    override val extCost: Int = 70
+    override val extDescription: String = "ваниль"
 }
