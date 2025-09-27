@@ -20,32 +20,32 @@ class SimpleCoffee : Coffee {
     override fun description() = "Простой кофе"
 }
 
-class MilkDecorator(private val coffee: Coffee) : Coffee {
+class MilkDecorator(private val coffee: Coffee) : Coffee by coffee {
     override fun cost(): Int {
-        TODO("Not yet implemented")
+        return coffee.cost() + 50
     }
 
     override fun description(): String {
-        TODO("Not yet implemented")
+        return coffee.description() + ", молоко"
     }
 }
 
-class SugarDecorator(private val coffee: Coffee) : Coffee {
+class SugarDecorator(private val coffee: Coffee) : Coffee by coffee {
     override fun cost(): Int {
-        TODO("Not yet implemented")
+        return coffee.cost() + 20
     }
 
     override fun description(): String {
-        TODO("Not yet implemented")
+        return coffee.description() + ", сахар"
     }
 }
 
-class VanillaDecorator(private val coffee: Coffee) : Coffee {
+class VanillaDecorator(private val coffee: Coffee) : Coffee by coffee {
     override fun cost(): Int {
-        TODO("Not yet implemented")
+        return coffee.cost() + 70
     }
 
     override fun description(): String {
-        TODO("Not yet implemented")
+        return coffee.description() + ", ваниль"
     }
 }
